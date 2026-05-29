@@ -1,14 +1,14 @@
 // src/sections/About.jsx
 import React from 'react';
 import styles from './About.module.css';
-import aboutImg from '../assets/profile4.jpg';
+import aboutImg from '../assets/profile3.jpeg';
 
 export default function About() {
   return (
     <section id="about" className={styles.section}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.imageContainer}>
-          <img src={aboutImg} alt="Mohamed Yasir" className={styles.image} />
+          <img src={aboutImg} alt="Mustafa Khamis image" className={styles.image} />
           <div className={styles.frame}></div>
         </div>
         <div className={styles.content}>

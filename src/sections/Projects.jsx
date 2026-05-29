@@ -6,6 +6,13 @@ import styles from './Projects.module.css';
 export default function Projects() {
   const projects = [
     {
+      title: "Monty ShowCase",
+      type: "E-commerce Platform",
+      desc: "Designed and developed a dynamic e-commerce platform for showcasing and selling high-end products, emphasizing user experience and visual appeal.",
+      img: "/images/montyshowcaseHeroSection.png",
+      link: "https://monty-showcase.vercel.app"
+    },
+    {
       title: "ExeCode Agency",
       type: "High-End SaaS Platform",
       desc: "Architected a scalable digital engineering agency platform with modern tech stacks, focusing on seamless user experience and performance.",
