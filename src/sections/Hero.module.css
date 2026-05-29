@@ -129,6 +129,9 @@
 }
 
 @media (max-width: 968px) {
+  .hero {
+    padding-top: 10px;
+  }
   .grid {
     grid-template-columns: 1fr;
   }
@@ -140,9 +143,9 @@
   }
 }
 @media (max-width: 600px) {
-  .hero {
+  /* .hero {
     padding-top: 25px;
-  }
+  } */
   .btnPrimary{
     padding: 20px 24px;
     font-size: 0.875rem;
@@ -152,6 +155,9 @@
     padding: 20px 24px;
     font-size: 0.875rem;
     border-radius: 60px;
+  }
+  .content{
+    margin-top: 0px;
   }
 
 }

@@ -90,8 +90,8 @@ export default function Footer() {
           <div className={styles.links}>
             <h4>Contact</h4>
 
-            <a href="mailto:safsafrwanda2006@gmail.com">
-              mustafakhamis@gmail.com
+            <a href="mailto:m.mustafakh249@gmail.com">
+              m.mustafakh249@gmail.com
             </a>
 
             <a
