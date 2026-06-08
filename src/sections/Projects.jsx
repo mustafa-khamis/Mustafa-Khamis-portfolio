@@ -6,6 +6,13 @@ import styles from './Projects.module.css';
 export default function Projects() {
   const projects = [
     {
+      title: "CanLens studio",
+      type: "Photography Equipment Store",
+      desc: "Premium photography equipment store and studio booking platform for content creators, photographers, and businesses.",
+      img: "/images/canlensHero.png",
+      link: "https://canlens.sudanteach.com"
+    },
+    {
       title: "Monty ShowCase",
       type: "E-commerce Platform",
       desc: "Designed and developed a dynamic e-commerce platform for showcasing and selling high-end products, emphasizing user experience and visual appeal.",
