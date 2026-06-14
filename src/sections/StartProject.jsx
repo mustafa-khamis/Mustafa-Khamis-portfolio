@@ -7,19 +7,19 @@ const PROJECT_TYPES = [
   'SaaS Platform', 'Portfolio Website', 'E-commerce Store', 'Landing Page', 'Custom System'
 ];
 
-const TECHNOLOGIES = [
-  { id: 'react', name: 'React', icon: '/icons/react.png' },
-  { id: 'nextjs', name: 'Next.js', icon: '/icons/nextjs.png' },
-  { id: 'nodejs', name: 'Node.js', icon: '/icons/node.png' },
-  { id: 'express', name: 'Express', icon: '/icons/express.png' },
-  { id: 'mysql', name: 'MySQL', icon: '/icons/mysql.png' },
-  { id: 'postgres', name: 'PostgreSQL', icon: '/icons/postgres.png' },
-  { id: 'mongodb', name: 'MongoDB', icon: '/icons/mongodb.png' },
-  { id: 'supabase', name: 'Supabase', icon: '/icons/supabase.png' },
-  { id: 'fastapi', name: 'FastAPI', icon: '/icons/fastapi.png' },
-  { id: 'tailwind', name: 'Tailwind', icon: '/icons/tailwind.png' },
-  { id: 'auth', name: 'Auth Systems', icon: '/icons/auth.png' },
-  { id: 'responsive', name: 'Responsive Design', icon: '/icons/responsive.png' },
+const FEATURES = [
+  { id: 'auth', name: 'User Authentication', icon: '/icons/auth.png' }, // Re-using existing icon if available, or just keeping the structure
+  { id: 'payments', name: 'Payment Integration', icon: '/icons/responsive.png' },
+  { id: 'admin', name: 'Admin Dashboard', icon: '/icons/react.png' },
+  { id: 'analytics', name: 'Analytics & Reporting', icon: '/icons/nextjs.png' },
+  { id: 'cms', name: 'Content Management', icon: '/icons/node.png' },
+  { id: 'api', name: 'Custom API/Integrations', icon: '/icons/express.png' },
+  { id: 'booking', name: 'Booking/Scheduling', icon: '/icons/mysql.png' },
+  { id: 'ecommerce', name: 'E-Commerce Logic', icon: '/icons/postgres.png' },
+  { id: 'realtime', name: 'Real-time Features', icon: '/icons/mongodb.png' },
+  { id: 'ai', name: 'AI/LLM Integration', icon: '/icons/supabase.png' },
+  { id: 'seo', name: 'Advanced SEO', icon: '/icons/tailwind.png' },
+  { id: 'multilingual', name: 'Multi-lingual Support', icon: '/icons/responsive.png' },
 ];
 
 const STORAGE_KEY = 'portfolio_onboarding_data';
@@ -163,10 +163,10 @@ Generated via Portfolio Onboarding.
 
               {step === 2 && (
                 <div className={styles.stepContent}>
-                  <h3 className={styles.stepTitle}>Technology Stack</h3>
-                  <p className={styles.stepDesc}>Which tools should we use? (Multi-select)</p>
+                  <h3 className={styles.stepTitle}>Core Features</h3>
+                  <p className={styles.stepDesc}>What functionalities does the project require? (Multi-select)</p>
                   <div className={styles.techGrid}>
-                    {TECHNOLOGIES.map((tech) => (
+                    {FEATURES.map((tech) => (
                       <div
                         key={tech.id}
                         className={`${styles.techCard} ${formData.techStack.includes(tech.name) ? styles.techActive : ''}`}

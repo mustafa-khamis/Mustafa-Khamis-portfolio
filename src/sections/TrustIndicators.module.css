@@ -1,0 +1,109 @@
+.section {
+  position: relative;
+  background-color: var(--bg-color);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.textColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin-bottom: 24px;
+}
+
+.sub {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 48px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.statItem {
+  padding-left: 24px;
+  border-left: 2px solid var(--surface-border);
+}
+
+.statItem h4 {
+  font-size: 2.5rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.statItem p {
+  color: var(--text-tertiary);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.testimonialColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.testimonialCard {
+  background: var(--surface-color);
+  border: 1px solid var(--surface-border);
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.quoteIcon {
+  font-size: 4rem;
+  font-family: serif;
+  color: var(--accent-glow);
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  line-height: 1;
+}
+
+.quoteText {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.authorInfo {
+  border-top: 1px solid var(--surface-border);
+  padding-top: 24px;
+}
+
+.authorName {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.authorRole {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+}

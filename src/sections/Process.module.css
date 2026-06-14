@@ -1,0 +1,92 @@
+.section {
+  background-color: var(--surface-color);
+  border-top: 1px solid var(--surface-border);
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.header {
+  max-width: 700px;
+  margin-bottom: 80px;
+}
+
+.heading {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin-bottom: 24px;
+}
+
+.sub {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  position: relative;
+}
+
+/* Connecting line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--surface-border);
+  z-index: 0;
+}
+
+.stepCard {
+  position: relative;
+  z-index: 1;
+}
+
+.stepNum {
+  width: 80px;
+  height: 80px;
+  background: var(--bg-color);
+  border: 1px solid var(--surface-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-highlight);
+  margin-bottom: 32px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.stepTitle {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.stepDesc {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 992px) {
+  .timeline {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+  }
+  
+  .timeline::before {
+    display: none; /* Hide line on smaller screens to avoid complexity */
+  }
+}
+
+@media (max-width: 600px) {
+  .timeline {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}

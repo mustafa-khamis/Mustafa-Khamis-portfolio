@@ -1,17 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  --bg-color: #050505;
-  --surface-color: #111111;
-  --surface-border: #222222;
-  --text-primary: #ffffff;
-  --text-secondary: #888888;
-  --accent-blue: #2563eb;
-  --accent-glow: rgba(37, 99, 235, 0.15);
+  /* Premium Dark Theme Tokens */
+  --bg-color: #030303;
+  --surface-color: #0c0c0c;
+  --surface-color-light: #151515;
+  --surface-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f8f8f8;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
   
-  --font-main: 'Inter', sans-serif;
-  --spacing-section: 120px;
-  --container-width: 1200px;
+  --accent-primary: #ffffff;
+  --accent-secondary: #a1a1aa;
+  --accent-highlight: #3b82f6; /* Used sparingly for high conversion actions */
+  --accent-glow: rgba(255, 255, 255, 0.05);
+  
+  --font-main: 'Inter', -apple-system, sans-serif;
+  --spacing-section: 160px;
+  --container-width: 1240px;
+  
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -25,7 +40,27 @@ body {
   color: var(--text-primary);
   font-family: var(--font-main);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
 }
 
 .container {
@@ -34,9 +69,68 @@ body {
   padding: 0 24px;
 }
 
-/* Reusable gradient text */
+/* Premium Typography Utilities */
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #71717a 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-accent {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Layout Utilities */
+.section-padding {
+  padding: var(--spacing-section) 0;
+}
+
+/* UI Elements */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  background-color: var(--text-primary);
+  color: var(--bg-color);
+  font-weight: 500;
+  font-size: 1rem;
+  border-radius: var(--radius-full);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  background-color: transparent;
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 1rem;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background-color: var(--surface-color-light);
+  border-color: rgba(255, 255, 255, 0.2);
 }

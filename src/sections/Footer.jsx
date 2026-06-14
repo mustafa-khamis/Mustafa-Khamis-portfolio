@@ -60,7 +60,7 @@ export default function Footer() {
               <FaWhatsapp />
             </a>
 
-            <a href="mailto:safsafrwanda2006@gmail.com">
+            <a href="mailto:mustafakhamis.dev@gmail.com">
               <FaEnvelope />
             </a>
           </div>
