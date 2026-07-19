@@ -105,9 +105,11 @@
 
 /* Form Styling */
 .formContainer {
-  background: var(--surface-color);
+  background: rgba(10, 10, 15, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--surface-border);
-  border-radius: 24px;
+  border-radius: var(--radius-xl);
   padding: 60px;
   min-height: 600px;
   display: flex;
@@ -115,13 +117,15 @@
   justify-content: space-between;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  box-shadow: var(--shadow-sm);
 }
 
 .stepTitle {
+  font-family: var(--font-display);
   font-size: 2.5rem;
   margin-bottom: 12px;
   letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 .stepDesc {
@@ -138,26 +142,26 @@
 }
 
 .optionCard {
-  background: #1a1a1a;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--surface-border);
   padding: 20px;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   color: white;
   cursor: pointer;
   text-align: left;
-  transition: all 0.2s ease;
+  transition: all var(--transition-normal);
   font-size: 0.95rem;
 }
 
 .optionCard:hover {
-  border-color: var(--text-secondary);
-  background: #222;
+  border-color: var(--surface-border-hover);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .activeOption {
-  border-color: var(--accent-blue);
-  background: rgba(37, 99, 235, 0.1);
-  box-shadow: 0 0 20px var(--accent-glow);
+  border-color: var(--accent-primary) !important;
+  background: rgba(0, 240, 255, 0.05) !important;
+  box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.1);
 }
 
 /* Tech Stack Grid */
@@ -368,8 +372,9 @@
 
 /* Better Typography */
 .optionCard {
+  font-family: var(--font-display);
   font-size: 0.92rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.4;
 }
 

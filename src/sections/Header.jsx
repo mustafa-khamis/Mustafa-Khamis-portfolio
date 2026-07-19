@@ -4,13 +4,22 @@ import styles from "./Header.module.css";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const navLinks = [
-    { name: "Work", href: "#projects" },
-    { name: "About", href: "#about" },
-    { name: "Assistant", href: "#assistant" },
+    { name: "Work", href: "#casestudies" },
+    { name: "About", href: "#valueprop" },
+    { name: "Process", href: "#process" },
     { name: "Contact", href: "#contact" },
   ];
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Prevent scroll when menu is open
   useEffect(() => {
@@ -19,7 +28,7 @@ export default function Header() {
   }, [menuOpen]);
 
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ""}`}>
       <nav className={`container ${styles.nav}`}>
         <div className={styles.logo}>
           M.Khamis<span className={styles.dot}>.</span>
