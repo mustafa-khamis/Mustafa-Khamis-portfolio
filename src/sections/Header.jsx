@@ -31,7 +31,7 @@ export default function Header() {
     <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ""}`}>
       <nav className={`container ${styles.nav}`}>
         <div className={styles.logo}>
-          M.Khamis<span className={styles.dot}>.</span>
+          Mustafa.Kh<span className={styles.dot}>.</span>
         </div>
 
         {/* Desktop Links */}
