@@ -43,7 +43,7 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            I partner with ambitious brands to build scalable, high-performance web products that solve complex business problems and convert visitors into customers.
+            I partner with ambitious brands to build scalable, high-performance Software Solutions that solve complex business problems and convert visitors into customers.
           </motion.p>
 
           <motion.div 
