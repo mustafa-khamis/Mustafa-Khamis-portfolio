@@ -210,7 +210,7 @@ export default function PortfolioChatbot() {
         transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
       >
         <span className="launcher-icon-wrap" aria-hidden="true">
-          <img src="/icons/chatbot.png" alt="" />
+          <img src="/icons/technical-support.png" alt="" />
         </span>
         <span className="launcher-copy" aria-hidden="true">
           <span className="launcher-copy-inner">
@@ -244,7 +244,7 @@ export default function PortfolioChatbot() {
             <header className="chatbot-header">
               <div className="chatbot-title-group">
                 <div className="chatbot-avatar">
-                  <img src="/icons/chatbot.png" alt="" />
+                  <img src="/icons/technical-support.png" alt="" />
                 </div>
 
                 <div className="chatbot-title-block">
