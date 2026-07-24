@@ -357,7 +357,7 @@ https://www.linkedin.com/in/mustafa-khamis
 
 CONTACT
 
-Potential clients who want to build a website, mobile app, dashboard, or custom software solution are encouraged to use the contact section on Mustafa's portfolio website.
+Potential clients who want to build a website, mobile app, dashboard, or custom software solution are encouraged to use the contact section on Mustafa's portfolio website and also can contact via the phone number +250 794 101 251 , or whatsapp link with the same phone number.
 
 PRICING
 
