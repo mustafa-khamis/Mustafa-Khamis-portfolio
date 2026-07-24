@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { sendChatMessage } from "../../services/chatApi";
 import "./PortfolioChatbot.css";
@@ -16,6 +17,14 @@ const SUGGESTED_QUESTIONS = [
   "How can I start a project?",
 ];
 
+const LAUNCHER_TEXTS = [
+  "Ask Mustafa AI",
+  "Ask about my work",
+  "Explore my services",
+  "Start a conversation",
+  "Have a question?",
+];
+
 function createMessage(role, content) {
   return {
     id: crypto.randomUUID(),
@@ -26,16 +35,17 @@ function createMessage(role, content) {
 
 export default function PortfolioChatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([
-    INITIAL_MESSAGE,
-  ]);
+  const [messages, setMessages] = useState([INITIAL_MESSAGE]);
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [previousInteractionId, setPreviousInteractionId] =
     useState(null);
+  const [launcherExpanded, setLauncherExpanded] = useState(false);
+  const [launcherTextIndex, setLauncherTextIndex] = useState(0);
+  const [launcherText, setLauncherText] = useState("");
 
   const messagesEndRef = useRef(null);
-  const inputRef = useRef(null);
+  const textareaRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({
@@ -45,9 +55,76 @@ export default function PortfolioChatbot() {
 
   useEffect(() => {
     if (isOpen) {
-      inputRef.current?.focus();
+      textareaRef.current?.focus();
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setLauncherExpanded(true);
+      setLauncherTextIndex(0);
+      setLauncherText("");
+      return undefined;
+    }
+
+    setLauncherExpanded(false);
+    setLauncherText("");
+
+    const expandTimer = window.setTimeout(() => {
+      setLauncherExpanded(true);
+      setLauncherTextIndex(0);
+    }, 380);
+
+    const collapseTimer = window.setTimeout(() => {
+      setLauncherExpanded(false);
+      setLauncherText("");
+    }, 2400);
+
+    const remountTimer = window.setTimeout(() => {
+      setLauncherExpanded(true);
+      setLauncherTextIndex(1);
+    }, 3200);
+
+    return () => {
+      window.clearTimeout(expandTimer);
+      window.clearTimeout(collapseTimer);
+      window.clearTimeout(remountTimer);
+    };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!launcherExpanded || isOpen) {
+      setLauncherText("");
+      return undefined;
+    }
+
+    const targetText = LAUNCHER_TEXTS[launcherTextIndex];
+    setLauncherText("");
+
+    let currentIndex = 0;
+    const typingTimer = window.setInterval(() => {
+      currentIndex += 1;
+      setLauncherText(targetText.slice(0, currentIndex));
+
+      if (currentIndex >= targetText.length) {
+        window.clearInterval(typingTimer);
+      }
+    }, 38);
+
+    return () => window.clearInterval(typingTimer);
+  }, [launcherExpanded, launcherTextIndex, isOpen]);
+
+  useEffect(() => {
+    if (!launcherExpanded || isOpen) {
+      return undefined;
+    }
+
+    const rotationTimer = window.setInterval(() => {
+      setLauncherTextIndex((current) => (current + 1) % LAUNCHER_TEXTS.length);
+    }, 2600);
+
+    return () => window.clearInterval(rotationTimer);
+  }, [launcherExpanded, isOpen]);
 
   async function handleSend(customMessage) {
     const messageText =
@@ -59,16 +136,9 @@ export default function PortfolioChatbot() {
       return;
     }
 
-    const userMessage = createMessage(
-      "user",
-      messageText
-    );
+    const userMessage = createMessage("user", messageText);
 
-    setMessages((current) => [
-      ...current,
-      userMessage,
-    ]);
-
+    setMessages((current) => [...current, userMessage]);
     setInput("");
     setIsSending(true);
 
@@ -78,28 +148,17 @@ export default function PortfolioChatbot() {
         previousInteractionId,
       });
 
-      const assistantMessage = createMessage(
-        "assistant",
-        result.reply
-      );
+      const assistantMessage = createMessage("assistant", result.reply);
 
-      setMessages((current) => [
-        ...current,
-        assistantMessage,
-      ]);
-
+      setMessages((current) => [...current, assistantMessage]);
       setPreviousInteractionId(result.interactionId);
     } catch (error) {
       const errorMessage = createMessage(
         "assistant",
-        error.message ||
-          "Sorry, I couldn't process that message."
+        error.message || "Sorry, I couldn't process that message."
       );
 
-      setMessages((current) => [
-        ...current,
-        errorMessage,
-      ]);
+      setMessages((current) => [...current, errorMessage]);
     } finally {
       setIsSending(false);
     }
@@ -110,6 +169,13 @@ export default function PortfolioChatbot() {
     handleSend();
   }
 
+  function handleInputKeyDown(event) {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      handleSend();
+    }
+  }
+
   function resetConversation() {
     setMessages([INITIAL_MESSAGE]);
     setPreviousInteractionId(null);
@@ -118,114 +184,142 @@ export default function PortfolioChatbot() {
 
   return (
     <>
-      <button
-        className="chatbot-launcher"
+      <motion.button
+        className={`chatbot-launcher ${launcherExpanded ? "is-expanded" : ""} ${isOpen ? "is-open" : ""}`}
         type="button"
         onClick={() => setIsOpen((current) => !current)}
-        aria-label={
-          isOpen ? "Close AI assistant" : "Open AI assistant"
-        }
+        aria-label={isOpen ? "Close AI assistant" : "Open AI assistant"}
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
       >
-        {isOpen ? "×" : "AI"}
-      </button>
+        <span className="launcher-icon-wrap" aria-hidden="true">
+          <img src="/icons/chatbot.png" alt="" />
+        </span>
+        <span className="launcher-copy" aria-hidden="true">
+          <span className="launcher-copy-inner">
+            {launcherText}
+          </span>
+        </span>
+      </motion.button>
 
-      {isOpen && (
-        <section
-          className="chatbot-window"
-          aria-label="Mustafa AI assistant"
-        >
-          <header className="chatbot-header">
-            <div>
-              <div className="chatbot-avatar">M</div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.section
+            className="chatbot-window"
+            aria-label="Mustafa AI assistant"
+            initial={{ opacity: 0, y: 14, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 10, scale: 0.98 }}
+            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <header className="chatbot-header">
+              <div className="chatbot-title-group">
+                <div className="chatbot-avatar">
+                  <img src="/icons/chatbot.png" alt="" />
+                </div>
 
-              <div>
-                <h2>Mustafa AI</h2>
-                <p>
-                  <span className="status-dot" />
-                  Online
-                </p>
+                <div className="chatbot-title-block">
+                  <div className="chatbot-title-row">
+                    <h2>Mustafa AI</h2>
+                    <span className="availability-pill">
+                      <span className="status-dot" />
+                      Online
+                    </span>
+                  </div>
+                  <p>Portfolio assistant</p>
+                </div>
               </div>
+
+              <div className="header-actions">
+                <button
+                  type="button"
+                  onClick={resetConversation}
+                  className="icon-button"
+                  aria-label="Start a new conversation"
+                >
+                  ↺
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="icon-button"
+                  aria-label="Close assistant"
+                >
+                  ×
+                </button>
+              </div>
+            </header>
+
+            <div className="chatbot-messages">
+              {messages.map((message) => (
+                <div key={message.id} className={`message-row ${message.role}`}>
+                  <div className="message-bubble">{message.content}</div>
+                </div>
+              ))}
+
+              {messages.length === 1 && (
+                <div className="welcome-card">
+                  <p className="welcome-eyebrow">Portfolio assistant</p>
+                  <h3>Hi, I’m Mustafa’s portfolio assistant.</h3>
+                  <p>
+                    Ask me about his services, selected work, tools, or how to begin a project.
+                  </p>
+                  <div className="suggestions">
+                    {SUGGESTED_QUESTIONS.map((question) => (
+                      <button
+                        key={question}
+                        type="button"
+                        onClick={() => handleSend(question)}
+                      >
+                        {question}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {isSending && (
+                <div className="message-row assistant">
+                  <div className="message-bubble typing" aria-label="Assistant is typing">
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                </div>
+              )}
+
+              <div ref={messagesEndRef} />
             </div>
 
-            <button
-              type="button"
-              onClick={resetConversation}
-              className="reset-button"
-            >
-              New chat
-            </button>
-          </header>
+            <form className="chatbot-form" onSubmit={handleSubmit}>
+              <label className="sr-only" htmlFor="chatbot-input">
+                Message the assistant
+              </label>
+              <textarea
+                ref={textareaRef}
+                id="chatbot-input"
+                value={input}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={handleInputKeyDown}
+                placeholder="Ask about Mustafa’s work..."
+                maxLength={1000}
+                disabled={isSending}
+                aria-label="Chat message"
+                rows={1}
+              />
 
-          <div className="chatbot-messages">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`message-row ${message.role}`}
-              >
-                <div className="message-bubble">
-                  {message.content}
-                </div>
-              </div>
-            ))}
+              <button type="submit" disabled={isSending || !input.trim()}>
+                Send
+              </button>
+            </form>
 
-            {messages.length === 1 && (
-              <div className="suggestions">
-                {SUGGESTED_QUESTIONS.map((question) => (
-                  <button
-                    key={question}
-                    type="button"
-                    onClick={() => handleSend(question)}
-                  >
-                    {question}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {isSending && (
-              <div className="message-row assistant">
-                <div className="message-bubble typing">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-              </div>
-            )}
-
-            <div ref={messagesEndRef} />
-          </div>
-
-          <form
-            className="chatbot-form"
-            onSubmit={handleSubmit}
-          >
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(event) =>
-                setInput(event.target.value)
-              }
-              placeholder="Ask about Mustafa..."
-              maxLength={1000}
-              disabled={isSending}
-              aria-label="Chat message"
-            />
-
-            <button
-              type="submit"
-              disabled={isSending || !input.trim()}
-            >
-              Send
-            </button>
-          </form>
-
-          <small className="chatbot-disclaimer">
-            AI responses may be incomplete. Contact Mustafa
-            for final project details.
-          </small>
-        </section>
-      )}
+            <small className="chatbot-disclaimer">
+              AI responses may be incomplete. Contact Mustafa for final project details.
+            </small>
+          </motion.section>
+        )}
+      </AnimatePresence>
     </>
   );
 }
