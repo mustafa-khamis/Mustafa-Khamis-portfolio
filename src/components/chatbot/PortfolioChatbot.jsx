@@ -288,11 +288,6 @@ export default function PortfolioChatbot() {
 
               {messages.length === 1 && (
                 <div className="welcome-card">
-                  <p className="welcome-eyebrow">Portfolio assistant</p>
-                  <h3>Hi, I’m Mustafa’s portfolio assistant.</h3>
-                  <p>
-                    Ask me about his services, selected work, tools, or how to begin a project.
-                  </p>
                   <div className="suggestions">
                     {SUGGESTED_QUESTIONS.map((question) => (
                       <button
