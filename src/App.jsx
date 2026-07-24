@@ -9,6 +9,7 @@ import TrustIndicators from './sections/TrustIndicators';
 import StartProject from './sections/StartProject';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
+import PortfolioChatbot from "./components/chatbot/PortfolioChatbot";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
         <Contact />
         <Footer />
       </main>
+
+      <PortfolioChatbot />
     </>
   );
 }
