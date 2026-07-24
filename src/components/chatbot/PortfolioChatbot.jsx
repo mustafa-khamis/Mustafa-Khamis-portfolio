@@ -3,6 +3,17 @@ import { useEffect, useRef, useState } from "react";
 import { sendChatMessage } from "../../services/chatApi";
 import "./PortfolioChatbot.css";
 
+function useIsMobile(breakpoint = 640) {
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth <= breakpoint);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, [breakpoint]);
+  return isMobile;
+}
+
 const INITIAL_MESSAGE = {
   id: "welcome",
   role: "assistant",
@@ -43,6 +54,7 @@ export default function PortfolioChatbot() {
   const [launcherExpanded, setLauncherExpanded] = useState(false);
   const [launcherTextIndex, setLauncherTextIndex] = useState(0);
   const [launcherText, setLauncherText] = useState("");
+  const isMobile = useIsMobile();
 
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
@@ -189,9 +201,13 @@ export default function PortfolioChatbot() {
         type="button"
         onClick={() => setIsOpen((current) => !current)}
         aria-label={isOpen ? "Close AI assistant" : "Open AI assistant"}
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0, scale: 0.88 }}
+        animate={{
+          opacity: isMobile && isOpen ? 0 : 1,
+          scale: 1,
+          pointerEvents: isMobile && isOpen ? "none" : "auto",
+        }}
+        transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
       >
         <span className="launcher-icon-wrap" aria-hidden="true">
           <img src="/icons/chatbot.png" alt="" />
@@ -208,10 +224,22 @@ export default function PortfolioChatbot() {
           <motion.section
             className="chatbot-window"
             aria-label="Mustafa AI assistant"
-            initial={{ opacity: 0, y: 14, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.98 }}
-            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            initial={isMobile
+              ? { opacity: 0, y: "100%" }
+              : { opacity: 0, y: 14, scale: 0.98 }
+            }
+            animate={isMobile
+              ? { opacity: 1, y: 0 }
+              : { opacity: 1, y: 0, scale: 1 }
+            }
+            exit={isMobile
+              ? { opacity: 0, y: "100%" }
+              : { opacity: 0, y: 10, scale: 0.98 }
+            }
+            transition={isMobile
+              ? { duration: 0.36, ease: [0.32, 0.72, 0, 1] }
+              : { duration: 0.26, ease: [0.16, 1, 0.3, 1] }
+            }
           >
             <header className="chatbot-header">
               <div className="chatbot-title-group">
