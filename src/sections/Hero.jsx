@@ -24,13 +24,12 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <motion.div 
-            className={styles.badge}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <span className={styles.pulse}></span>
-            Available for new opportunities
+            <span></span>
+            
           </motion.div>
           
           <h1 className={styles.title}>
