@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import styles from "./Hero.module.css";
 import HeroCanvas from "../components/canvas/HeroCanvas";
 
@@ -51,20 +52,12 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <button
-              onClick={() => {
-                window.location = ("#startproject");
-              }}
-              className="btn-primary"
-            >
+            <Link to="/startproject" className="btn-primary">
               Start a Project
-            </button>
-            <button
-              onClick={() => { window.location = ("#casestudies"); }}
-              className="btn-secondary"
-            >
+            </Link>
+            <a href="#casestudies" className="btn-secondary">
               View Case Studies
-            </button>
+            </a>
           </motion.div>
 
           <motion.div 

@@ -1,31 +1,19 @@
 import React from 'react';
-import Header from './sections/Header';
-import Hero from './sections/Hero';
-import SocialProof from './sections/SocialProof';
-import ValueProp from './sections/ValueProp';
-import CaseStudies from './sections/CaseStudies';
-import Process from './sections/Process';
-import TrustIndicators from './sections/TrustIndicators';
-import StartProject from './sections/StartProject';
-import Contact from './sections/Contact';
-import Footer from './sections/Footer';
-import PortfolioChatbot from "./components/chatbot/PortfolioChatbot";
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import StartProjectPage from './pages/StartProject/StartProjectPage';
+import ScrollToHash from './components/ScrollToHash';
+import PortfolioChatbot from './components/chatbot/PortfolioChatbot';
 
 function App() {
   return (
     <>
-      <main>
-        <Header />
-        <Hero />
-        <SocialProof />
-        <ValueProp />
-        <CaseStudies />
-        <Process />
-        <TrustIndicators />
-        <StartProject/>
-        <Contact />
-        <Footer />
-      </main>
+      <ScrollToHash />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/startproject" element={<StartProjectPage />} />
+      </Routes>
 
       <PortfolioChatbot />
     </>

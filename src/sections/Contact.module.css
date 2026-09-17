@@ -1,11 +1,9 @@
-/* src/sections/Contact.module.css */
+﻿/* src/sections/Contact.module.css */
 .section {
   padding: var(--spacing-section) 0;
 }
 .box {
-  background: rgba(10, 10, 15, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: #ffffff;
   border: 1px solid var(--surface-border);
   padding: 80px 40px;
   border-radius: var(--radius-xl);
@@ -44,7 +42,7 @@
 }
 .primary {
   background: var(--text-primary);
-  color: #000;
+  color: #fff;
   padding: 16px 40px;
   border-radius: var(--radius-full);
   font-family: var(--font-display);
@@ -55,7 +53,7 @@
 
 .primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 26px rgba(4, 46, 107, 0.3);
 }
 .secondary {
   border: 1px solid var(--surface-border);
@@ -70,8 +68,8 @@
 }
 
 .secondary:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: var(--text-secondary);
+  background-color: rgba(4, 46, 107, 0.045);
+  border-color: var(--accent-primary);
 }
 
 
@@ -115,7 +113,7 @@
 .modalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.75);
+  background: rgba(2, 8, 20, 0.78);
   backdrop-filter: blur(8px);
 
   display: flex;
@@ -133,13 +131,11 @@
 .modal {
   width: 100%;
   max-width: 560px;
-  background: rgba(10, 10, 15, 0.8);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: #ffffff;
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-xl);
   padding: 35px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(0, 240, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(4, 46, 107, 0.2);
   animation: modalShow 0.3s ease;
 }
 
@@ -163,7 +159,7 @@
   font-family: var(--font-display);
   font-size: 2rem;
   margin-bottom: 10px;
-  color: white;
+  color: var(--text-primary);
   font-weight: 700;
 }
 
@@ -187,15 +183,15 @@
 .inputGroup textarea {
   width: 100%;
 
-  background: rgba(255,255,255,0.03);
+  background: rgba(4, 46, 107, 0.035);
 
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid rgba(4, 46, 107, 0.14);
 
   border-radius: 16px;
 
   padding: 16px 18px;
 
-  color: white;
+  color: var(--text-primary);
 
   font-size: 0.95rem;
 
@@ -211,11 +207,11 @@
 
 .inputGroup input:focus,
 .inputGroup textarea:focus {
-  border-color: var(--accent-blue);
+  border-color: var(--accent-primary);
 
-  background: rgba(255,255,255,0.05);
+  background: rgba(4, 46, 107, 0.055);
 
-  box-shadow: 0 0 0 4px rgba(37,99,235,0.15);
+  box-shadow: 0 0 0 4px rgba(47, 143, 214, 0.15);
 }
 
 /* ========================= */
@@ -231,9 +227,9 @@
 
 .cancelBtn {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(4, 46, 107, 0.16);
 
-  color: white;
+  color: var(--text-primary);
 
   padding: 14px 22px;
 
@@ -245,11 +241,11 @@
 }
 
 .cancelBtn:hover {
-  background: rgba(255,255,255,0.06);
+  background: rgba(4, 46, 107, 0.055);
 }
 
 .bookBtn {
-  background: var(--accent-blue);
+  background: var(--accent-primary);
 
   border: none;
 
@@ -268,7 +264,7 @@
 
 .bookBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 240, 255, 0.25);
+  box-shadow: 0 10px 25px rgba(47, 143, 214, 0.25);
 }
 
 /* ========================= */

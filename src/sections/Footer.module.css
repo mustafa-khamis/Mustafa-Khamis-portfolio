@@ -1,4 +1,4 @@
-/* src/sections/Footer.module.css */
+﻿/* src/sections/Footer.module.css */
 
 .footer {
   padding: 90px 0 30px;
@@ -55,8 +55,8 @@
   width: 46px;
   height: 46px;
   border-radius: 14px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(4, 46, 107, 0.045);
+  border: 1px solid rgba(4, 46, 107, 0.12);
 
   display: flex;
   align-items: center;
@@ -72,7 +72,8 @@
   transform: translateY(-4px);
   background: var(--accent-primary);
   border-color: var(--accent-primary);
-  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.35);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(6, 74, 129, 0.3);
 }
 
 /* Links */
@@ -114,15 +115,22 @@
 /* Bottom */
 
 .bottom {
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(4, 46, 107, 0.12);
   padding-top: 30px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 24px;
 
-  color: #666;
+  color: var(--text-tertiary);
   font-size: 0.85rem;
+}
+
+.bottom p {
+  /* Reserves room for the fixed AI launcher resting in the same
+     corner so page copy is never tucked under it. */
+  padding-left: 74px;
 }
 
 .topButton {
@@ -131,8 +139,8 @@
   border-radius: 50%;
   border: none;
 
-  background: rgba(255,255,255,0.06);
-  color: #fff;
+  background: rgba(4, 46, 107, 0.06);
+  color: var(--text-primary);
 
   display: flex;
   align-items: center;
@@ -144,6 +152,7 @@
 
 .topButton:hover {
   background: var(--accent-primary);
+  color: #fff;
   transform: translateY(-4px);
 }
 
@@ -185,7 +194,7 @@
 
   .links {
     padding-bottom: 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(4, 46, 107, 0.1);
   }
 
   .socialIcons {
@@ -202,6 +211,10 @@
     flex-direction: column;
     gap: 20px;
     text-align: center;
+  }
+
+  .bottom p {
+    padding-left: 0;
   }
 
   .topButton {

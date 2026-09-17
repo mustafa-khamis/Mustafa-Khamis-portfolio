@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { sendChatMessage } from "../../services/chatApi";
 import "./PortfolioChatbot.css";
 
@@ -55,6 +56,8 @@ export default function PortfolioChatbot() {
   const [launcherTextIndex, setLauncherTextIndex] = useState(0);
   const [launcherText, setLauncherText] = useState("");
   const isMobile = useIsMobile();
+  const location = useLocation();
+  const needsClearance = location.pathname.startsWith("/startproject");
 
   const messagesEndRef = useRef(null);
   const textareaRef = useRef(null);
@@ -97,10 +100,16 @@ export default function PortfolioChatbot() {
       setLauncherTextIndex(1);
     }, 3200);
 
+    const settleTimer = window.setTimeout(() => {
+      setLauncherExpanded(false);
+      setLauncherText("");
+    }, 5600);
+
     return () => {
       window.clearTimeout(expandTimer);
       window.clearTimeout(collapseTimer);
       window.clearTimeout(remountTimer);
+      window.clearTimeout(settleTimer);
     };
   }, [isOpen]);
 
@@ -197,7 +206,7 @@ export default function PortfolioChatbot() {
   return (
     <>
       <motion.button
-        className={`chatbot-launcher ${launcherExpanded ? "is-expanded" : ""} ${isOpen ? "is-open" : ""}`}
+        className={`chatbot-launcher ${launcherExpanded ? "is-expanded" : ""} ${isOpen ? "is-open" : ""} ${needsClearance ? "is-raised" : ""}`}
         type="button"
         onClick={() => setIsOpen((current) => !current)}
         aria-label={isOpen ? "Close AI assistant" : "Open AI assistant"}

@@ -1,44 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Premium Dark Theme Tokens */
-  --bg-color: #030305;
-  --bg-color-rgb: 3, 3, 5;
-  --surface-color: #0a0a0f;
-  --surface-color-light: #12121a;
-  --surface-border: rgba(255, 255, 255, 0.05);
-  --surface-border-hover: rgba(255, 255, 255, 0.15);
-  
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --text-tertiary: #71717a;
-  
-  --accent-primary: #00f0ff;
-  --accent-secondary: #3b82f6;
-  --accent-highlight: #00f0ff;
-  --accent-glow: rgba(0, 240, 255, 0.15);
-  --accent-gradient: linear-gradient(135deg, #00f0ff 0%, #3b82f6 100%);
-  
+  /* Brand Palette — Deep Navy -> Dark Blue -> Ocean Blue -> Medium Blue -> Steel Blue -> White */
+  --navy-deep: #042E6B;
+  --blue-dark: #043A6B;
+  --blue-ocean: #064A81;
+  --blue-medium: #1C5484;
+  --blue-steel: #375F84;
+  --brand-white: #FFFFFF;
+
+  /* Surface Tokens — white canvas, navy ink */
+  --bg-color: #ffffff;
+  --bg-color-rgb: 255, 255, 255;
+  --surface-color: #f4f8fc;
+  --surface-color-light: #eaf1f9;
+  --surface-border: rgba(4, 46, 107, 0.1);
+  --surface-border-hover: rgba(4, 46, 107, 0.24);
+
+  --text-primary: #071c38;
+  --text-secondary: #45607f;
+  --text-tertiary: #6f88a6;
+
+  /* Accent — taken straight from the brand palette; dark enough to read on white */
+  --accent-primary: #064a81;
+  --accent-secondary: var(--blue-medium);
+  --accent-highlight: #0b5fad;
+  --accent-rgb: 6, 74, 129;
+  --accent-glow: rgba(6, 74, 129, 0.12);
+  --accent-gradient: linear-gradient(135deg, var(--navy-deep) 0%, var(--blue-ocean) 45%, var(--blue-steel) 100%);
+  --accent-gradient-vivid: linear-gradient(135deg, var(--blue-ocean) 0%, var(--blue-medium) 100%);
+  --brand-gradient-full: linear-gradient(120deg, var(--navy-deep) 0%, var(--blue-dark) 25%, var(--blue-ocean) 50%, var(--blue-medium) 75%, var(--blue-steel) 100%);
+
   --font-main: 'Inter', -apple-system, sans-serif;
   --font-display: 'Outfit', -apple-system, sans-serif;
-  
+
   --spacing-section: 160px;
   --spacing-section-mobile: 100px;
   --container-width: 1280px;
-  
+
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
   --radius-xl: 32px;
   --radius-full: 9999px;
-  
+
   --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-normal: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.2);
-  --shadow-md: 0 8px 24px rgba(0,0,0,0.3);
-  --shadow-glow: 0 0 40px rgba(0, 240, 255, 0.1);
+
+  --shadow-sm: 0 4px 14px rgba(4, 46, 107, 0.08);
+  --shadow-md: 0 12px 32px rgba(4, 46, 107, 0.12);
+  --shadow-glow: 0 0 40px rgba(6, 74, 129, 0.1);
 }
 
 * {
@@ -53,6 +65,10 @@ html {
 
 body {
   background-color: var(--bg-color);
+  background-image:
+    radial-gradient(circle at 12% 0%, rgba(6, 74, 129, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 88% 18%, rgba(4, 46, 107, 0.05) 0%, transparent 40%);
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: var(--font-main);
   -webkit-font-smoothing: antialiased;
@@ -94,14 +110,14 @@ img {
 
 /* Premium Typography Utilities */
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--blue-steel) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-accent {
-  background: var(--accent-gradient);
+  background: linear-gradient(135deg, var(--blue-ocean) 0%, var(--blue-medium) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -119,7 +135,7 @@ img {
 
 /* UI Elements */
 .glass-panel {
-  background: rgba(18, 18, 26, 0.6);
+  background: rgba(6, 74, 129, 0.035);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid var(--surface-border);
@@ -138,15 +154,15 @@ img {
   align-items: center;
   justify-content: center;
   padding: 16px 32px;
-  background: var(--accent-gradient);
-  color: #000000;
+  background: var(--accent-gradient-vivid);
+  color: #ffffff;
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 1rem;
   letter-spacing: 0.02em;
   border-radius: var(--radius-full);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  box-shadow: 0 4px 14px rgba(0, 240, 255, 0.3);
+  box-shadow: 0 8px 22px rgba(6, 74, 129, 0.28);
   position: relative;
   overflow: hidden;
 }
@@ -164,7 +180,7 @@ img {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 14px 32px rgba(6, 74, 129, 0.36);
 }
 
 .btn-primary:hover::after {
@@ -188,6 +204,6 @@ img {
 }
 
 .btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.03);
-  border-color: var(--text-secondary);
+  background-color: rgba(6, 74, 129, 0.05);
+  border-color: var(--accent-primary);
 }

@@ -64,9 +64,7 @@
 }
 
 .testimonialCard {
-  background: rgba(18, 18, 26, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: #ffffff;
   border: 1px solid var(--surface-border);
   padding: 40px;
   border-radius: var(--radius-xl);
@@ -83,7 +81,7 @@
 .quoteIcon {
   font-size: 4rem;
   font-family: serif;
-  color: var(--accent-glow);
+  color: rgba(6, 74, 129, 0.16);
   position: absolute;
   top: 16px;
   left: 24px;

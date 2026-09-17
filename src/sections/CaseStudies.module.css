@@ -1,4 +1,4 @@
-.section {
+﻿.section {
   position: relative;
   background-color: var(--bg-color);
 }
@@ -51,7 +51,7 @@
   overflow: hidden;
   border: 1px solid var(--surface-border);
   aspect-ratio: 4/3;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 30px 60px rgba(4, 46, 107, 0.16);
 }
 
 .glowEffect {
@@ -127,7 +127,7 @@
   border-left: 3px solid var(--accent-primary);
   padding-left: 16px;
   margin-top: 8px;
-  background: linear-gradient(90deg, rgba(0, 240, 255, 0.05) 0%, transparent 100%);
+  background: linear-gradient(90deg, rgba(47, 143, 214, 0.05) 0%, transparent 100%);
   padding-top: 8px;
   padding-bottom: 8px;
   border-radius: 0 8px 8px 0;

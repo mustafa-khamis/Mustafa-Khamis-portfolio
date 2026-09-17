@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -7,10 +8,10 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   const navLinks = [
-    { name: "Work", href: "#casestudies" },
-    { name: "About", href: "#valueprop" },
-    { name: "Process", href: "#process" },
-    { name: "Contact", href: "#contact" },
+    { name: "Work", href: "/#casestudies" },
+    { name: "About", href: "/#valueprop" },
+    { name: "Process", href: "/#process" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   useEffect(() => {
@@ -29,10 +30,10 @@ export default function Header() {
 
   return (
     <header className={`${styles.header} ${scrolled ? styles.headerScrolled : ""}`}>
-      <nav className={`container ${styles.nav}`}>
-        <div className={styles.logo}>
+      <nav className={styles.nav}>
+        <Link to="/" className={styles.logo}>
           Mustafa.Kh<span className={styles.dot}>.</span>
-        </div>
+        </Link>
 
         {/* Desktop Links */}
         <ul className={styles.links}>
@@ -44,14 +45,9 @@ export default function Header() {
         </ul>
 
         <div className={styles.navAction}>
-          <button
-            onClick={() => {
-              window.location = "#startproject";
-            }}
-            className={styles.btnNav}
-          >
+          <Link to="/startproject" className={styles.btnNav}>
             Let's Talk
-          </button>
+          </Link>
 
           {/* Mobile Toggle Button */}
           <button
@@ -98,18 +94,19 @@ export default function Header() {
                     </motion.li>
                   ))}
                 </ul>
-                <motion.button
-                  onClick={() => {
-                    window.location = "#startproject";
-                    setMenuOpen(false);
-                  }}
+                <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.5 }}
-                  className={styles.sideMenuBtn}
                 >
-                  Let's Talk
-                </motion.button>
+                  <Link
+                    to="/startproject"
+                    onClick={() => setMenuOpen(false)}
+                    className={styles.sideMenuBtn}
+                  >
+                    Let's Talk
+                  </Link>
+                </motion.div>
               </div>
             </motion.div>
           </>

@@ -1,11 +1,27 @@
-import React, { useRef, useMemo, useEffect } from 'react';
+import React, { useRef, useMemo, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Environment, Sphere, MeshDistortMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.innerWidth <= breakpoint
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    const handler = (e) => setIsMobile(e.matches);
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
 const AnimatedSphere = () => {
   const sphereRef = useRef();
-  
+  const isMobile = useIsMobile();
+
   useFrame((state) => {
     if (sphereRef.current) {
       sphereRef.current.rotation.x = state.clock.getElapsedTime() * 0.1;
@@ -13,16 +29,24 @@ const AnimatedSphere = () => {
     }
   });
 
+  // Phones keep the original small, subtle sphere — the larger, bolder
+  // version is a desktop-only flourish.
+  const scale = isMobile ? 1.15 : 2.3;
+  const position = isMobile ? [0, -0.15, -0.6] : [0, -0.1, -0.5];
+  const opacity = isMobile ? 0.32 : 0.34;
+
   return (
-    <Sphere ref={sphereRef} args={[1, 64, 64]} scale={1.5}>
+    <Sphere ref={sphereRef} args={[1, 64, 64]} scale={scale} position={position}>
       <MeshDistortMaterial
-        color="#00f0ff"
+        color="#064a81"
         attach="material"
         distort={0.4}
         speed={1.5}
-        roughness={0.2}
-        metalness={0.8}
+        roughness={0.55}
+        metalness={0.05}
         wireframe={true}
+        transparent
+        opacity={opacity}
       />
     </Sphere>
   );
@@ -107,7 +131,7 @@ const Particles = ({ count = 500 }) => {
       <pointLight ref={light} distance={40} intensity={8} color="white" />
       <instancedMesh ref={mesh} args={[null, null, count]}>
         <sphereGeometry args={[0.02, 16, 16]} />
-        <meshStandardMaterial color="#00f0ff" roughness={0.1} />
+        <meshStandardMaterial color="#064a81" roughness={0.1} />
       </instancedMesh>
     </>
   );
@@ -118,8 +142,8 @@ export default function HeroCanvas() {
     <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}>
       <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
         <ambientLight intensity={0.5} />
-        <directionalLight position={[10, 10, 5]} intensity={1} color="#00f0ff" />
-        <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#3b82f6" />
+        <directionalLight position={[10, 10, 5]} intensity={1} color="#064a81" />
+        <directionalLight position={[-10, -10, -5]} intensity={0.5} color="#1c5484" />
         <AnimatedSphere />
         {/* <Particles count={300} /> */}
         <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />

@@ -1,5 +1,6 @@
 // src/sections/Footer.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 
 import {
@@ -72,11 +73,11 @@ export default function Footer() {
           <div className={styles.links}>
             <h4>Navigation</h4>
 
-            <a href="#hero">Home</a>
-            <a href="#projects">Projects</a>
-            <a href="#skills">Skills</a>
-            <a href="#startproject">Start Project</a>
-            <a href="#contact">Contact</a>
+            <Link to="/#hero">Home</Link>
+            <Link to="/#casestudies">Projects</Link>
+            <Link to="/#valueprop">Skills</Link>
+            <Link to="/startproject">Start Project</Link>
+            <Link to="/#contact">Contact</Link>
           </div>
 
           <div className={styles.links}>
