@@ -149,6 +149,9 @@
     max-width: 100%;
     font-size: 1.05rem;
     line-height: 1.55;
+    /* Darker than the desktop steel-blue tone so it stays crisp against
+       the animated mesh on smaller screens. */
+    color: var(--text-primary);
   }
 
   .ctaGroup {

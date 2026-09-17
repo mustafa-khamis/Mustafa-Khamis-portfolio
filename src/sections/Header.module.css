@@ -162,18 +162,6 @@
   .navAction {
     gap: 0;
   }
-
-  .menuToggle {
-    background: none;
-    border-radius: 0;
-    width: 24px;
-    height: 14px;
-    padding: 0;
-  }
-
-  .menuToggle span {
-    background-color: var(--text-primary);
-  }
 }
 
 
@@ -182,21 +170,23 @@
 .menuToggle {
   display: none;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  width: 42px;
-  height: 42px;
-  background: rgba(255, 255, 255, 0.1);
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--blue-dark) 100%);
   border: none;
   border-radius: 50%;
   cursor: pointer;
   z-index: 1001;
-  padding: 14px 10px;
+  padding: 0;
   flex-shrink: 0;
+  box-shadow: 0 10px 22px rgba(4, 46, 107, 0.32);
 }
 
 .menuToggle span {
-  width: 100%;
+  width: 18px;
   height: 2px;
   background-color: #ffffff;
   border-radius: 2px;
