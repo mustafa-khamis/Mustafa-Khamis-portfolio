@@ -172,33 +172,43 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
-  width: 44px;
-  height: 44px;
-  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--blue-dark) 100%);
-  border: none;
+  gap: 4.5px;
+  width: 42px;
+  height: 42px;
+  background: rgba(4, 46, 107, 0.045);
+  border: 1px solid var(--surface-border);
   border-radius: 50%;
   cursor: pointer;
   z-index: 1001;
   padding: 0;
   flex-shrink: 0;
-  box-shadow: 0 10px 22px rgba(4, 46, 107, 0.32);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.menuToggle:hover {
+  background: rgba(4, 46, 107, 0.08);
+  border-color: var(--surface-border-hover);
 }
 
 .menuToggle span {
-  width: 18px;
-  height: 2px;
-  background-color: #ffffff;
+  width: 17px;
+  height: 1.5px;
+  background-color: var(--text-primary);
   border-radius: 2px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   transform-origin: center;
 }
 
-.toggleActive span:first-child {
+.toggleActive span:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
 }
 
-.toggleActive span:last-child {
+.toggleActive span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.toggleActive span:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
 
