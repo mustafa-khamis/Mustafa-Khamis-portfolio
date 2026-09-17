@@ -617,7 +617,7 @@
   color: var(--text-tertiary);
 }
 
-.inputField, .textareaField {
+.inputField {
   width: 100%;
   padding: 13px 16px;
   background: #fbfdff;
@@ -630,16 +630,11 @@
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
 
-.inputField::placeholder, .textareaField::placeholder {
+.inputField::placeholder {
   color: var(--text-tertiary);
 }
 
-.textareaField {
-  min-height: 110px;
-  resize: none;
-}
-
-.inputField:focus, .textareaField:focus {
+.inputField:focus {
   border-color: var(--accent-primary);
   background: #ffffff;
   box-shadow: 0 0 0 3px rgba(47, 143, 214, 0.14);

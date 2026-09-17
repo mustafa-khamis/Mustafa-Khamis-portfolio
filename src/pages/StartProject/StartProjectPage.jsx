@@ -11,19 +11,15 @@ import {
   FEATURES,
   BUDGET_OPTIONS,
   URGENCY_OPTIONS,
-  STYLE_OPTIONS,
-  THEME_OPTIONS,
 } from "./data";
 
-const STORAGE_KEY = "portfolio_onboarding_data_v3";
-const TOTAL_STEPS = 7;
+const STORAGE_KEY = "portfolio_onboarding_data_v4";
+const TOTAL_STEPS = 5;
 
 const STEP_TITLES = [
   "What are we building?",
   "Choose a starting point",
   "Stack & core features",
-  "Tell me about the project",
-  "Design direction",
   "Timeline & budget",
   "How do I reach you?",
 ];
@@ -34,8 +30,6 @@ const emptyForm = {
   projectTypes: [],
   techStack: [],
   features: [],
-  details: { name: "", description: "", goal: "", audience: "" },
-  design: { style: "", theme: "", animation: "Subtle", colors: "", inspirations: "" },
   timeline: { budget: "", deadline: "", urgency: "Medium", longTerm: "No" },
   contact: { name: "", whatsapp: "", email: "", country: "" },
 };
@@ -78,9 +72,8 @@ export default function StartProjectPage() {
   const canContinue = useMemo(() => {
     if (step === 1) return formData.categories.length > 0;
     if (step === 2) return formData.projectTypes.length > 0;
-    if (step === 4) return Boolean(formData.details.name.trim());
     return true;
-  }, [step, formData.categories, formData.projectTypes, formData.details.name]);
+  }, [step, formData.categories, formData.projectTypes]);
 
   const canSubmit =
     formData.contact.name.trim() &&
@@ -156,7 +149,7 @@ export default function StartProjectPage() {
   };
 
   const handleSubmit = () => {
-    const { categoryNames, projectTypes, techStack, features, details, design, timeline, contact } = formData;
+    const { categoryNames, projectTypes, techStack, features, timeline, contact } = formData;
     const featureNames = features
       .map((id) => FEATURES.find((f) => f.id === id)?.name)
       .filter(Boolean);
@@ -168,18 +161,6 @@ export default function StartProjectPage() {
 *STARTING POINT:* ${projectTypes.join(", ") || "Not specified"}
 *TECH STACK:* ${techStack.join(", ") || "Not specified"}
 *FEATURES:* ${featureNames.join(", ") || "Not specified"}
-
-*PROJECT*
-- Name: ${details.name}
-- Description: ${details.description}
-- Goal: ${details.goal}
-- Audience: ${details.audience}
-
-*DESIGN*
-- Style: ${design.style}
-- Theme: ${design.theme}
-- Color direction: ${design.colors}
-- Inspiration: ${design.inspirations}
 
 *TIMELINE*
 - Budget: ${timeline.budget}
@@ -305,15 +286,9 @@ Generated via Portfolio Project Planner.
                   />
                 )}
                 {step === 4 && (
-                  <DetailsStep formData={formData} setField={setField} />
-                )}
-                {step === 5 && (
-                  <DesignStep formData={formData} setField={setField} />
-                )}
-                {step === 6 && (
                   <TimelineStep formData={formData} setField={setField} />
                 )}
-                {step === 7 && (
+                {step === 5 && (
                   <ContactStep formData={formData} setField={setField} />
                 )}
               </motion.div>
@@ -516,99 +491,7 @@ function StackStep({ formData, onToggleTech, onToggleFeature }) {
   );
 }
 
-/* ─────────────────────────────  Step 4: Details  ───────────────────────────── */
-
-function DetailsStep({ formData, setField }) {
-  return (
-    <div className={styles.stepContent}>
-      <h3 className={styles.stepTitle}>Tell me about the project</h3>
-      <p className={styles.stepDesc}>The more context, the sharper the proposal.</p>
-      <div className={styles.inputGroup}>
-        <TextField
-          label="Project name"
-          required
-          placeholder="e.g. Acme SaaS Dashboard"
-          value={formData.details.name}
-          onChange={(e) => setField("details", "name", e.target.value)}
-        />
-        <TextAreaField
-          label="Brief description"
-          placeholder="What does it do, and who is it for?"
-          value={formData.details.description}
-          onChange={(e) => setField("details", "description", e.target.value)}
-        />
-        <TextField
-          label="Primary goal"
-          placeholder="e.g. generate leads, sell products"
-          value={formData.details.goal}
-          onChange={(e) => setField("details", "goal", e.target.value)}
-        />
-        <TextField
-          label="Target audience"
-          placeholder="e.g. small business owners"
-          value={formData.details.audience}
-          onChange={(e) => setField("details", "audience", e.target.value)}
-        />
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────  Step 5: Design  ───────────────────────────── */
-
-function DesignStep({ formData, setField }) {
-  return (
-    <div className={styles.stepContent}>
-      <h3 className={styles.stepTitle}>Design direction</h3>
-      <p className={styles.stepDesc}>Help me understand the look and feel you're after.</p>
-
-      <span className={styles.fieldLabel}>Style</span>
-      <div className={styles.chipRow}>
-        {STYLE_OPTIONS.map((s) => (
-          <button
-            key={s}
-            type="button"
-            className={`${styles.chip} ${formData.design.style === s ? styles.chipActive : ""}`}
-            onClick={() => setField("design", "style", s)}
-          >
-            {s}
-          </button>
-        ))}
-      </div>
-
-      <span className={styles.fieldLabel}>Theme</span>
-      <div className={styles.chipRow}>
-        {THEME_OPTIONS.map((t) => (
-          <button
-            key={t}
-            type="button"
-            className={`${styles.chip} ${formData.design.theme === t ? styles.chipActive : ""}`}
-            onClick={() => setField("design", "theme", t)}
-          >
-            {t}
-          </button>
-        ))}
-      </div>
-
-      <div className={styles.inputGroup} style={{ marginTop: 28 }}>
-        <TextField
-          label="Color preference"
-          placeholder="e.g. deep blues, brand palette"
-          value={formData.design.colors}
-          onChange={(e) => setField("design", "colors", e.target.value)}
-        />
-        <TextField
-          label="Sites/apps you like the look of"
-          placeholder="Links, optional"
-          value={formData.design.inspirations}
-          onChange={(e) => setField("design", "inspirations", e.target.value)}
-        />
-      </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────  Step 6: Timeline  ───────────────────────────── */
+/* ─────────────────────────────  Step 4: Timeline  ───────────────────────────── */
 
 function TimelineStep({ formData, setField }) {
   return (
@@ -665,7 +548,7 @@ function TimelineStep({ formData, setField }) {
   );
 }
 
-/* ─────────────────────────────  Step 7: Contact  ───────────────────────────── */
+/* ─────────────────────────────  Step 5: Contact  ───────────────────────────── */
 
 function ContactStep({ formData, setField }) {
   return (
@@ -741,21 +624,6 @@ const TextField = ({ label, value, onChange, required, placeholder }) => (
       value={value}
       onChange={onChange}
       className={styles.inputField}
-      placeholder={placeholder}
-    />
-  </div>
-);
-
-const TextAreaField = ({ label, value, onChange, required, placeholder }) => (
-  <div className={styles.fieldGroup}>
-    <label className={styles.fieldTopLabel}>
-      {label}
-      {required && <span className={styles.requiredStar}> *</span>}
-    </label>
-    <textarea
-      value={value}
-      onChange={onChange}
-      className={styles.textareaField}
       placeholder={placeholder}
     />
   </div>

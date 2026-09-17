@@ -270,7 +270,3 @@ export const BUDGET_OPTIONS = [
 ];
 
 export const URGENCY_OPTIONS = ["Flexible", "Medium", "Urgent"];
-
-export const STYLE_OPTIONS = ["Minimal", "Modern", "Futuristic", "Luxury", "Playful", "Corporate"];
-
-export const THEME_OPTIONS = ["Dark", "Light", "System / Either"];
