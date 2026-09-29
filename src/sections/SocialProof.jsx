@@ -7,7 +7,7 @@ export default function SocialProof() {
     { name: "imiPharm", type: "HealthTech" },
     { name: "CanLens", type: "E-Commerce" },
     { name: "ExeCode", type: "Agency" },
-    { name: "Monty Showcase", type: "Retail" },
+    { name: "RwanMart", type: "Retail" },
   ];
 
   return (

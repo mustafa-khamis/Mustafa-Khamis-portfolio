@@ -1,47 +1,69 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import styles from './CaseStudies.module.css';
+import React from "react";
+import { motion } from "framer-motion";
+import styles from "./CaseStudies.module.css";
 
 const caseStudies = [
-   {
+  {
+    title: "RwanMart Marketplace",
+    type: "Marketplace & E-Commerce",
+    problem:
+      "Buyers and sellers in Rwanda often rely on fragmented platforms to discover products, connect with sellers, and grow their businesses online.",
+    solution:
+      "Built a full-stack marketplace that brings buyers and sellers together in one platform, with product listings, seller profiles, messaging, location-based discovery, promotional offers, external products, subscriptions, notifications, and an admin moderation system.",
+    impact:
+      "Created a complete marketplace experience that makes it easier for sellers to reach local buyers and for customers to discover products across Rwanda.",
+    img: "/images/rwanmart.png",
+    link: "https://www.rwanmart.com",
+  },
+  {
     title: "CanLens Studio",
     type: "E-Commerce & Booking",
-    problem: "Fragmented customer journey requiring multiple platforms for equipment purchasing and studio booking.",
-    solution: "Unified the experience into a seamless platform with dynamic scheduling, integrated payments, and inventory sync.",
-    impact: "Increased booking conversion rate by 65% and streamlined administrative workload.",
+    problem:
+      "Fragmented customer journey requiring multiple platforms for equipment purchasing and studio booking.",
+    solution:
+      "Unified the experience into a seamless platform with dynamic scheduling, integrated payments, and inventory sync.",
+    impact:
+      "Increased booking conversion rate by 65% and streamlined administrative workload.",
     img: "/images/canlensHero.png",
-    link: "https://canlens.com"
+    link: "https://canlens.com",
   },
-   {
+  {
     title: "imiPharm",
     type: "HealthTech Infrastructure",
-    problem: "Inefficient inventory management and disjointed communication between pharmacies and suppliers.",
-    solution: "Developed a comprehensive centralized dashboard with real-time inventory tracking and automated ordering workflows.",
-    impact: "Reduced operational overhead by 40% and eliminated stockout events for partnered pharmacies.",
-    img: "/images/imipharm.png", 
-    link: "#"
+    problem:
+      "Inefficient inventory management and disjointed communication between pharmacies and suppliers.",
+    solution:
+      "Developed a comprehensive centralized dashboard with real-time inventory tracking and automated ordering workflows.",
+    impact:
+      "Reduced operational overhead by 40% and eliminated stockout events for partnered pharmacies.",
+    img: "/images/imipharm.png",
+    link: "#",
   },
   {
     title: "Monty Showcase",
     type: "Premium Retail Platform",
-    problem: "High bounce rates due to poor visual presentation and slow load times on mobile devices.",
-    solution: "Rebuilt the front-end with a focus on immersive visuals, micro-interactions, and aggressive performance optimization.",
-    impact: "Decreased bounce rate by 30% and increased average session duration by 2 minutes.",
+    problem:
+      "High bounce rates due to poor visual presentation and slow load times on mobile devices.",
+    solution:
+      "Rebuilt the front-end with a focus on immersive visuals, micro-interactions, and aggressive performance optimization.",
+    impact:
+      "Decreased bounce rate by 30% and increased average session duration by 2 minutes.",
     img: "/images/montyshowcaseHeroSection.png",
-    link: "https://monty-showcase.vercel.app"
+    link: "https://monty-showcase.vercel.app",
   },
 
   {
     title: "SudanTeach",
     type: "EdTech Platform",
-    problem: "Limited access to interactive digital education in developing regions with low-bandwidth constraints.",
-    solution: "Architected a highly optimized, low-latency live learning ecosystem with resilient streaming capabilities.",
-    impact: "Scaled to 10,000+ active learners, significantly improving digital learning accessibility across the country.",
+    problem:
+      "Limited access to interactive digital education in developing regions with low-bandwidth constraints.",
+    solution:
+      "Architected a highly optimized, low-latency live learning ecosystem with resilient streaming capabilities.",
+    impact:
+      "Scaled to 10,000+ active learners, significantly improving digital learning accessibility across the country.",
     img: "/images/SudanTeachPoster.png",
-    link: "https://sudanteach.com"
-  }
- 
-  
+    link: "https://sudanteach.com",
+  },
 ];
 
 export default function CaseStudies() {
@@ -49,16 +71,19 @@ export default function CaseStudies() {
     <section id="casestudies" className={`section-padding ${styles.section}`}>
       <div className="container">
         <div className={styles.header}>
-          <h2 className={styles.heading}>Selected <span className="gradient-text">Case Studies</span></h2>
+          <h2 className={styles.heading}>
+            Selected <span className="gradient-text">Case Studies</span>
+          </h2>
           <p className={styles.sub}>
-            A look at how I've helped businesses overcome complex technical challenges and achieve measurable growth.
+            A look at how I've helped businesses overcome complex technical
+            challenges and achieve measurable growth.
           </p>
         </div>
 
         <div className={styles.list}>
           {caseStudies.map((study, idx) => (
-            <motion.div 
-              key={idx} 
+            <motion.div
+              key={idx}
               className={styles.card}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -67,13 +92,17 @@ export default function CaseStudies() {
             >
               <div className={styles.visual}>
                 <div className={styles.glowEffect}></div>
-                <img src={study.img} alt={`${study.title} Interface`} className={styles.image} />
+                <img
+                  src={study.img}
+                  alt={`${study.title} Interface`}
+                  className={styles.image}
+                />
               </div>
 
               <div className={styles.content}>
                 <span className={styles.type}>{study.type}</span>
                 <h3 className={styles.title}>{study.title}</h3>
-                
+
                 <div className={styles.details}>
                   <div className={styles.detailBlock}>
                     <h4>The Challenge</h4>
@@ -90,7 +119,12 @@ export default function CaseStudies() {
                 </div>
 
                 <div className={styles.actions}>
-                  <a href={study.link} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                  <a
+                    href={study.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-primary"
+                  >
                     View Live Project
                   </a>
                 </div>
