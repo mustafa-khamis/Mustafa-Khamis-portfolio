@@ -74,6 +74,69 @@ export default function PortfolioChatbot() {
     }
   }, [isOpen]);
 
+  // On mobile, opening the chat auto-focuses the textarea, which pops the
+  // keyboard. Without a scroll lock, the browser scrolls the whole page to
+  // keep the focused input in view, dragging the "fixed" chat window along
+  // with it. Pinning the body in place stops that.
+  useEffect(() => {
+    if (!isOpen || !isMobile) return undefined;
+
+    const scrollY = window.scrollY;
+    const { style } = document.body;
+    const previous = {
+      position: style.position,
+      top: style.top,
+      left: style.left,
+      right: style.right,
+      width: style.width,
+      overflow: style.overflow,
+    };
+
+    style.position = "fixed";
+    style.top = `-${scrollY}px`;
+    style.left = "0";
+    style.right = "0";
+    style.width = "100%";
+    style.overflow = "hidden";
+
+    return () => {
+      style.position = previous.position;
+      style.top = previous.top;
+      style.left = previous.left;
+      style.right = previous.right;
+      style.width = previous.width;
+      style.overflow = previous.overflow;
+      window.scrollTo(0, scrollY);
+    };
+  }, [isOpen, isMobile]);
+
+  // Keep the chat window's height matched to the actual visible viewport
+  // (i.e. excluding the on-screen keyboard) instead of the full layout
+  // viewport, so only the input/send bar rides up with the keyboard while
+  // the header and message list stay put.
+  useEffect(() => {
+    if (!isOpen || !isMobile) return undefined;
+    const viewport = window.visualViewport;
+    if (!viewport) return undefined;
+
+    const root = document.documentElement;
+    const sync = () => {
+      root.style.setProperty("--chat-vh", `${viewport.height}px`);
+      root.style.setProperty("--chat-vv-top", `${viewport.offsetTop}px`);
+    };
+
+    sync();
+    viewport.addEventListener("resize", sync);
+    viewport.addEventListener("scroll", sync);
+
+    return () => {
+      viewport.removeEventListener("resize", sync);
+      viewport.removeEventListener("scroll", sync);
+      root.style.removeProperty("--chat-vh");
+      root.style.removeProperty("--chat-vv-top");
+    };
+  }, [isOpen, isMobile]);
+
   useEffect(() => {
     if (isOpen) {
       setLauncherExpanded(true);
